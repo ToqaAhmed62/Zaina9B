@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Life on Land</title>
+<style>
+body {
+font-family: 'Garamond', serif;
+background: linear-gradient(135deg, #e8f5e9 0%, #a8d5ba 100%);
+color: #2c3e50;
+margin: 0;
+padding: 0;
+font-size: 22px;
+overflow-x: hidden;
+}
+
+header {
+background: linear-gradient(135deg, rgba(74, 99, 72, 0.9), rgba(54, 75, 54, 0.9));
+padding: 20px;
+text-align: center;
+border-bottom: 5px solid #3a5b46;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+animation: fadeIn 2s ease;
+}
+
+h1 {
+font-size: 4em;
+margin: 0;
+color: #ffffff;
+font-weight: bold;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+nav a {
+color: #ffffff;
+text-decoration: none;
+margin: 0 15px;
+font-weight: bold;
+transition: color 0.3s, transform 0.3s;
+padding: 5px;
+font-size: 1.2em;
+display: inline-block;
+}
+
+nav a:hover {
+color: #a1dbb9;
+transform: scale(1.1);
+}
+
+.search-bar {
+margin: 20px 0;
+animation: fadeIn 2s ease 0.5s;
+}
+
+.search-bar input {
+padding: 12px;
+border: 1px solid #4a6348;
+border-radius: 5px;
+width: 250px;
+transition: border-color 0.3s, box-shadow 0.3s;
+font-size: 1.1em;
+}
+
+.search-bar input:focus {
+border-color: #a1dbb9;
+outline: none;
+box-shadow: 0 0 10px rgba(161, 219, 185, 0.5);
+}
+
+.content {
+padding: 20px;
+animation: fadeIn 1s ease 0.8s;
+}
+
+.section {
+margin-bottom: 30px;
+background: rgba(255, 255, 255, 0.8);
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+transition: transform 0.3s, box-shadow 0.3s;
+animation: fadeInUp 1s ease;
+}
+
+.section:hover {
+transform: scale(1.02);
+box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+color: #4a6348;
+border-bottom: 2px solid #3a5b46;
+padding-bottom: 10px;
+font-size: 2.8em;
+margin-bottom: 15px;
+}
+
+ul {
+margin-left: 20px;
+}
+
+ul li {
+margin: 10px 0;
+}
+
+footer {
+text-align: center;
+padding: 20px;
+background: #3a5b46;
+color: white;
+position: relative;
+bottom: 0;
+width: 100%;
+box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.4);
+}
+
+#trivia {
+background-color: rgba(200, 230, 201, 0.9);
+padding: 15px;
+border-radius: 10px;
+margin-top: 20px;
+border: 2px solid #4a6348;
+}
+
+.question {
+margin-bottom: 20px;
+padding: 10px;
+background-color: #d9fdd9;
+border-radius: 8px;
+border-left: 5px solid #4a6348;
+}
+
+.rules {
+margin-bottom: 20px;
+padding: 10px;
+background-color: #b2e0b2;
+border-radius: 8px;
+font-weight: bold;
+}
+
+button {
+background-color: #4a6348; /* Button background color */
+color: #ffffff; /* Button text color */
+border: none;
+border-radius: 5px;
+padding: 10px 15px;
+font-size: 1.1em;
+cursor: pointer;
+transition: background-color 0.3s, transform 0.3s;
+margin: 5px;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+background-color: #3a5b46; /* Darker shade on hover */
+transform: translateY(-2px);
+}
+
+button:active {
+transform: translateY(1px); /* Press effect */
+}
+
+canvas {
+position: fixed;
+top: 0;
+left: 0;
+pointer-events: none;
+z-index: -2;
+}
+
+/* Animation */
+@keyframes fadeIn {
+from { opacity: 0; }
+to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+/* Media styles */
+.media {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 20px;
+}
+
+.media img, .media video {
+border-radius: 10px;
+width: 300px;
+height: auto;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+transition: transform 0.3s;
+}
+
+.media img:hover, .media video:hover {
+transform: scale(1.05);
+}
+</style>
+</head>
+<body>
+<header>
+<h1>Life on Land</h1>
+<nav>
+<a href="#ecosystems">Ecosystems</a>
+<a href="#habitats-biomes">Habitats & Biomes</a>
+<a href="#conservation">Conservation</a>
+<a href="#importance">Importance</a>
+<a href="#threats">Threats</a>
+<a href="#trivia">Trivia Game</a>
+</nav>
+<div class="search-bar">
+<input type="text" id="searchInput" placeholder="Search sections..." onkeyup="searchSections()">
+</div>
+</header>
+
+<div class="content">
+<div class="section" id="ecosystems">
+<h2>Ecosystems</h2>
+<p>Life on land includes an incredibly rich diversity of ecosystems, each providing a unique array of services and habitats for plants, animals, and microorganisms. Forest ecosystems, for instance, cover about 31% of the Earth's land area, offering homes to over 80% of terrestrial species, including countless insects, birds, mammals, and plants. Beyond providing shelter and food, forests regulate our climate, absorbing nearly 2.6 billion tons of carbon dioxide every year, which helps mitigate the impact of global warming.</p>
+<p>Wetlands, which are among the most productive ecosystems, provide essential water filtration services, purifying the water before it flows into lakes, rivers, and oceans. These areas support rich biodiversity, acting as breeding grounds for fish, amphibians, and birds, and they also play a key role in flood control, as they can absorb large quantities of rainwater, preventing floods downstream.</p>
+<p>Grasslands, which cover about 20% of the Earth's surface, are home to large herbivores such as bison, antelope, and wild horses, and they also sustain predators like lions and wolves. These open landscapes are vital for grazing livestock and agriculture, supporting human livelihoods across the globe. Grasslands also help in carbon sequestration, storing carbon in their extensive root systems and providing resilience against climate change.</p>
+<p>Desert ecosystems, though seemingly barren, are adapted to extreme conditions, hosting a surprising array of life forms. Plants such as cacti and animals like camels and scorpions have developed unique ways to conserve water and withstand the harsh sun. Deserts cover about one-third of the Earth's land surface, contributing to the overall balance of our planet's ecosystems. Despite their dry nature, deserts are important in global nutrient cycles, including dust from deserts like the Sahara fertilizing ecosystems across the Atlantic in South America.</p>
+<p>Tundra ecosystems, located near the poles, are characterized by frozen soil, known as permafrost, and minimal vegetation. Despite these harsh conditions, tundras play a significant role in carbon storage and climate regulation. The plant species that survive in the tundra are highly adapted to the cold and short growing seasons, providing crucial habitats for animals such as caribou, Arctic foxes, and snowy owls. Tundra regions are particularly vulnerable to climate change, as the melting of permafrost releases stored carbon dioxide and methane, exacerbating global warming.</p>
+<div class="media">
+<img src="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Forest Ecosystem">
+<img src="https://i.pinimg.com/564x/d7/2e/52/d72e52d4b9018e3e32fca8417e41321b.jpg" alt="Grassland Ecosystem">
+<img src="https://i.pinimg.com/564x/61/fe/4e/61fe4e5dcb6782c6d4b9fdce3391b132.jpg" alt="Desert Ecosystem">
+
+</div>
+</div>
+<div class="section" id="habitats-biomes">
+<h2>Habitats & Biomes</h2>
+<p>Biomes are large geographical areas that host specific plant and animal life adapted to that environment. Each biome, such as tropical rainforests, savannas, deserts, and tundras, provides a unique set of conditions that support distinct ecosystems. Tropical rainforests, for instance, are home to the highest biodiversity on the planet, with over 50% of the world's species found within them. The Amazon Rainforest alone is known as the "lungs of the Earth" because of its vital role in producing oxygen and storing carbon dioxide.</p>
+<p>In contrast, deserts, which are characterized by very low rainfall, host species that have evolved to survive with minimal water. For example, the saguaro cactus can store large amounts of water in its thick stems, while animals like the fennec fox and kangaroo rat have adapted behaviors and physiology to conserve water and stay cool in the intense heat.</p>
+<p>Another important biome is the boreal forest, also known as taiga, which stretches across much of Canada, Russia, and Scandinavia. These forests, composed primarily of coniferous trees such as pines and firs, are crucial carbon sinks, absorbing significant amounts of carbon dioxide from the atmosphere. They provide a habitat for wildlife such as wolves, bears, and moose, and are essential for the livelihoods of indigenous peoples who have lived sustainably in these regions for millennia.</p>
+<p>Similarly, grasslands, including the North American prairies and African savannas, support vast herds of grazing animals such as bison, zebras, and wildebeest. These ecosystems are shaped by the interaction between fire, herbivory, and climatic conditions, maintaining a delicate balance that ensures their continued existence. Grasslands also support numerous bird species, many of which migrate vast distances to take advantage of seasonal resources.</p>
+<p>The marine biome, though not directly part of terrestrial life, interacts closely with coastal land ecosystems. Mangroves, for example, are found at the interface of land and sea and provide critical breeding grounds for fish and other marine species. Mangrove ecosystems also protect coastlines from storm surges and erosion, while trapping sediments and pollutants that would otherwise damage coral reefs and seagrass beds.</p>
+<div class="media">
+<img src="https://i.pinimg.com/564x/68/3b/36/683b3668df852eb1b79670a6ac0262cf.jpg" alt="Tundra Biome">
+<img src="https://i.pinimg.com/564x/7f/17/82/7f17821ef43386db4c8bee52fde067bd.jpg" alt="Tropical Biome">
+</div>
+</div>
+<div class="section" id="conservation">
+<h2>Conservation</h2>
+<p>The conservation of land ecosystems is vital to preserving the planet's biodiversity and ensuring the well-being of human societies. Conservation efforts can be broadly categorized into two types: in-situ conservation, which involves protecting species in their natural habitats, and ex-situ conservation, which involves preserving species in controlled environments, such as zoos, botanical gardens, or seed banks.</p>
+<p>Protected areas, such as national parks and nature reserves, are one of the most effective in-situ conservation tools. Globally, over 15% of the Earth's land is designated as protected, including iconic parks like Yellowstone in the United States and the Serengeti in Tanzania. These areas not only protect ecosystems but also offer opportunities for scientific research, ecotourism, and education. However, many protected areas face challenges from poaching, illegal logging, and encroachment by human populations.</p>
+<p>Wildlife corridors, which connect isolated patches of habitat, are another key conservation strategy. These corridors allow species to migrate, find mates, and access food and water, thereby maintaining genetic diversity and reducing the risk of inbreeding. For instance, the Mesoamerican Biological Corridor connects wildlife habitats across Central America, enabling species like jaguars and tapirs to move across large distances.</p>
+<p>In addition to creating protected areas, sustainable land-use practices are critical for conservation. Agroforestry, for example, integrates trees into agricultural systems, providing habitat for wildlife while improving soil health and reducing erosion. Similarly, sustainable logging practices, such as selective logging and reduced-impact logging, minimize damage to forests and maintain their ecological functions.</p>
+<p>Conservation also extends to restoring degraded ecosystems. Reforestation and afforestation projects, such as the Great Green Wall initiative in Africa, aim to restore forests and combat desertification. These projects not only sequester carbon but also provide livelihoods for local communities, enhance biodiversity, and improve water security.</p>
+<div class="media">
+<img src="https://i.pinimg.com/564x/f0/48/05/f04805f16bd4437aa80322866370d4d1.jpg" alt="Conservation Efforts">
+</div>
+</div>
+<div class="section" id="importance">
+<h2>Importance</h2>
+<p>Land ecosystems are crucial for human survival and well-being. They provide essential ecosystem services, including food production, water purification, carbon sequestration, and climate regulation. Forests, for example, produce oxygen and absorb carbon dioxide, playing a critical role in mitigating climate change. They also provide raw materials such as timber, fuelwood, and medicinal plants, supporting livelihoods for millions of people around the world.</p>
+<p>Grasslands, which are often referred to as the "breadbaskets of the world," support agriculture by providing fertile soil and grazing land for livestock. These ecosystems also help maintain soil structure and fertility, prevent erosion, and regulate water cycles, ensuring that crops receive the water they need to grow. In addition, grasslands sequester significant amounts of carbon in their root systems, helping to mitigate the effects of climate change.</p>
+<p>Wetlands, which are often overlooked, are among the most productive ecosystems on the planet. They act as natural water filters, trapping pollutants and sediments, and providing clean water for human consumption, agriculture, and industry. Wetlands also serve as buffers against floods and storm surges, protecting communities from natural disasters. Furthermore, they provide critical habitat for fish, amphibians, birds, and other wildlife, supporting biodiversity and maintaining healthy ecosystems.</p>
+<p>In addition to their ecological and economic importance, land ecosystems have cultural and spiritual significance for many indigenous peoples and local communities. Forests, mountains, rivers, and other natural features are often considered sacred, and they play an important role in the traditions, beliefs, and practices of these communities. Protecting land ecosystems is therefore not only a matter of environmental sustainability but also of preserving cultural heritage and respecting the rights of indigenous peoples.</p>
+<div class="media">
+<img src="https://i.pinimg.com/736x/55/0d/97/550d97ef6c983e620cd9c387991b08aa.jpg" alt="Importance of Ecosystems">
+</div>
+</div>
+<div class="section" id="threats">
+<h2>Threats</h2>
+<p>Land ecosystems face numerous threats from human activities, including deforestation, habitat destruction, pollution, and climate change. Deforestation, which is driven by logging, agriculture, and urbanization, is one of the most significant threats to forests. Each year, an estimated 10 million hectares of forest are lost, leading to the extinction of species, disruption of water cycles, and the release of carbon dioxide into the atmosphere.</p>
+<p>Habitat destruction, which occurs when natural habitats are converted for agriculture, industry, or infrastructure development, is another major threat to biodiversity. As habitats are fragmented and reduced in size, species are forced into smaller, isolated areas, where they are more vulnerable to extinction. Habitat loss is particularly devastating for large mammals, such as elephants and tigers, which require large territories to survive.</p>
+<p>Pollution, including air, water, and soil pollution, also poses a significant threat to land ecosystems. Industrial activities, agriculture, and waste disposal introduce harmful chemicals and pollutants into the environment, which can damage ecosystems and harm wildlife. For example, pesticides and fertilizers used in agriculture can contaminate soil and water, leading to the loss of biodiversity and the degradation of ecosystems.</p>
+<p>Climate change is perhaps the most far-reaching threat to land ecosystems. Rising temperatures, changing precipitation patterns, and more frequent extreme weather events are altering ecosystems and forcing species to adapt or migrate. In some cases, species are unable to adapt quickly enough, leading to population declines and extinctions. Climate change also exacerbates other threats, such as deforestation and habitat loss, by increasing the frequency and severity of wildfires, droughts, and storms.</p>
+<p>Invasive species, which are introduced to new ecosystems by human activities, can outcompete native species and disrupt ecological balance. Invasive plants, for example, can dominate landscapes and reduce the availability of food and habitat for native animals. Invasive species can also spread diseases that affect both wildlife and humans, further threatening biodiversity and ecosystem health.</p>
+<div class="media">
+<img src="https://i.pinimg.com/564x/0e/78/43/0e7843ffee5db85615977205aa7da85a.jpg" alt="Pollution Threat">
+</div>
+</div>
+
+<div class="section" id="trivia">
+<h2>Trivia Game</h2>
+<div class="rules">
+<h3>Rules:</h3>
+<ul>
+<li>Answer the questions by clicking on the correct option.</li>
+<li>Each correct answer earns you a point!</li>
+<li>Try to answer all questions to test your knowledge about life on land.</li>
+<li>At the end, you'll see your results!</li>
+</ul>
+</div>
+<div class="question" id="q1">
+<p>1. What percentage of the Earth's land surface is covered by forests?</p>
+<button onclick="checkAnswer('q1Result', true)">31%</button>
+<button onclick="checkAnswer('q1Result', false)">25%</button>
+<div id="q1Result"></div>
+</div>
+<div class="question" id="q2">
+<p>2. What is the largest terrestrial mammal?</p>
+<button onclick="checkAnswer('q2Result', true)">African Elephant</button>
+<button onclick="checkAnswer('q2Result', false)">Giraffe</button>
+<div id="q2Result"></div>
+</div>
+<div class="question" id="q3">
+<p>3. What percentage of animal species are found in rainforests?</p>
+<button onclick="checkAnswer('q3Result', true)">50%</button>
+<button onclick="checkAnswer('q3Result', false)">40%</button>
+<div id="q3Result"></div>
+</div>
+<div class="question" id="q4">
+<p>4. Which of the following is a primary producer?</p>
+<button onclick="checkAnswer('q4Result', true)">Grass</button>
+<button onclick="checkAnswer('q4Result', false)">Tiger</button>
+<div id="q4Result"></div>
+</div>
+<div class="question" id="q5">
+<p>5. What is the leading cause of climate change?</p>
+<button onclick="checkAnswer('q5Result', false)">Natural disasters</button>
+<button onclick="checkAnswer('q5Result', true)">Greenhouse gas emissions</button>
+<div id="q5Result"></div>
+</div>
+<div class="question" id="q6">
+<p>6. What is the largest land animal?</p>
+<button onclick="checkAnswer('q6Result', true)">African Elephant</button>
+<button onclick="checkAnswer('q6Result', false)">White Rhino</button>
+<div id="q6Result"></div>
+</div>
+<div class="question" id="q7">
+<p>7. Which tree is known as the "Tree of Life"?</p>
+<button onclick="checkAnswer('q7Result', false)">Oak</button>
+<button onclick="checkAnswer('q7Result', true)">Baobab</button>
+<div id="q7Result"></div>
+</div>
+<div class="question" id="q8">
+<p>8. What is a major threat to the Amazon rainforest?</p>
+<button onclick="checkAnswer('q8Result', true)">Logging</button>
+<button onclick="checkAnswer('q8Result', false)">Wind</button>
+<div id="q8Result"></div>
+</div>
+<div class="question" id="q9">
+<p>9. Which animal is often called a "keystone species" in ecosystems?</p>
+<button onclick="checkAnswer('q9Result', true)">Sea Otter</button>
+<button onclick="checkAnswer('q9Result', false)">Cheetah</button>
+<div id="q9Result"></div>
+</div>
+<div class="question" id="q10">
+<p>10. What do you call the variety of different species in a given area?</p>
+<button onclick="checkAnswer('q10Result', true)">Biodiversity</button>
+<button onclick="checkAnswer('q10Result', false)">Ecosystem</button>
+<div id="q10Result"></div>
+</div>
+</div>
+</div>
+
+<footer>
+<p>© 2024 Life on Land. All rights reserved.</p>
+</footer>
+
+<canvas id="canvas"></canvas>
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const leaves = [];
+const numLeaves = 100;
+
+for (let i = 0; i < numLeaves; i++) {
+leaves.push({
+x: Math.random() * canvas.width,
+y: Math.random() * canvas.height,
+size: Math.random() * 15 + 5,
+speed: Math.random() * 1 + 0.5,
+angle: Math.random() * Math.PI * 2,
+});
+}
+
+function drawLeaves() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+leaves.forEach(leaf => {
+ctx.save();
+ctx.translate(leaf.x, leaf.y);
+ctx.rotate(leaf.angle);
+ctx.fillStyle = '#4a6348'; // Leaf color
+ctx.beginPath();
+ctx.moveTo(0, 0);
+ctx.bezierCurveTo(-leaf.size / 2, -leaf.size / 2, -leaf.size / 2, leaf.size / 2, 0, leaf.size);
+ctx.bezierCurveTo(leaf.size / 2, leaf.size / 2, leaf.size / 2, -leaf.size / 2, 0, 0);
+ctx.closePath();
+ctx.fill();
+ctx.restore();
+
+leaf.y += leaf.speed;
+leaf.x += Math.sin(leaf.angle) * leaf.speed; // Horizontal movement
+leaf.angle += Math.random() * 0.02 - 0.01; // Slight random angle change
+
+if (leaf.y > canvas.height) leaf.y = -leaf.size;
+if (leaf.x > canvas.width) leaf.x = -leaf.size;
+});
+requestAnimationFrame(drawLeaves);
+}
+drawLeaves();
+
+window.addEventListener('resize', () => {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+});
+
+function checkAnswer(resultId, isCorrect) {
+const resultElement = document.getElementById(resultId);
+if (isCorrect) {
+resultElement.innerHTML = "Correct!";
+resultElement.style.color = "green";
+} else {
+resultElement.innerHTML = "Wrong!";
+resultElement.style.color = "red";
+}
+setTimeout(() => {
+resultElement.innerHTML = ""; // Clear result after a few seconds
+}, 1500);
+}
+
+function searchSections() {
+const input = document.getElementById('searchInput').value.toLowerCase();
+const sections = document.querySelectorAll('.section');
+sections.forEach(section => {
+const text = section.textContent.toLowerCase();
+section.style.display = text.includes(input) ? 'block' : 'none';
+});
+}
+</script>
+</body>
+</html>
